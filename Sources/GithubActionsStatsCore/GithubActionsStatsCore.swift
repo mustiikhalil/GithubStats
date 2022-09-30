@@ -21,14 +21,15 @@ public struct GithubActionsStatsCore {
       response: responses)
     let statistics = try githubStatistics.run()
     if !parameters.skipPrintingStats {
-      Printer(statistics: statistics)
-        .printSummary()
+      printer
+        .printSummary(for: statistics)
     }
     return statistics
   }
 
   // MARK: Private
 
+  private lazy var printer = Printer()
   private let parameters: Parameters
 
   private lazy var decoder: JSONDecoder = {

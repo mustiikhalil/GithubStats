@@ -5,6 +5,7 @@ public enum Status: String, Decodable {
 }
 
 public struct Statistics {
+  public let name: String
   public let workflowCount: Int
   public let startDate: Date
   public let endDate: Date

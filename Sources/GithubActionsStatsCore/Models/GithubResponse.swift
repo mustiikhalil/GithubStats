@@ -2,6 +2,7 @@ import Foundation
 
 struct WorkFlow: Decodable {
   let name: String
+  let path: String
   let conclusion: Status?
   let runStartedAt: Date
   let createdAt: Date

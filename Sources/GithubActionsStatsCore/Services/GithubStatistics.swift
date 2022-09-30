@@ -34,6 +34,7 @@ struct GithubStatistics {
     }
 
     return Statistics(
+      name: workflows.first!.path,
       workflowCount: workflows.count,
       startDate: workflows.first!.createdAt,
       endDate: workflows.last!.createdAt,

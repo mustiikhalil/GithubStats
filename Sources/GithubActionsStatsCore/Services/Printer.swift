@@ -2,16 +2,10 @@ import Foundation
 
 struct Printer {
 
-  // MARK: Lifecycle
-
-  init(statistics: Statistics) {
-    self.statistics = statistics
-  }
-
   // MARK: Internal
 
-  func printSummary() {
-    print("Summary: ")
+  func printSummary(for statistics: Statistics) {
+    print("Summary [\(statistics.name)]: ")
     print("workflow count: ", statistics.workflowCount)
     let startDate = dateFormatter.string(from: statistics.startDate)
     let endDate = dateFormatter.string(from: statistics.endDate)
@@ -22,7 +16,7 @@ struct Printer {
       print("percentage: \(Int(percentage * 100))")
       print("Total time: \(v.totalRunningTime.stringFromTimeInterval())")
       let averageTime: TimeInterval = v.totalRunningTime / Double(v.count)
-      print("Average time accross \(k) actions: \(averageTime.stringFromTimeInterval())")
+      print("Average time across \(k) actions: \(averageTime.stringFromTimeInterval())")
     }
     let date: TimeInterval = statistics.averageTime / statistics.totalRuns
     print("Total time run: \(statistics.averageTime.stringFromTimeInterval())")
@@ -36,8 +30,6 @@ struct Printer {
     dateFormatter.dateFormat = "MMM d, yyyy"
     return dateFormatter
   }()
-
-  private let statistics: Statistics
 }
 
 extension TimeInterval {
