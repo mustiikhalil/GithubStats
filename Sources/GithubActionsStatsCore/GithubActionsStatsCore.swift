@@ -20,7 +20,7 @@ public struct GithubActionsStatsCore {
     let githubStatistics = GithubStatistics(
       response: responses)
     let statistics = try githubStatistics.run()
-    if parameters.shouldPrintStats {
+    if !parameters.skipPrintingStats {
       Printer(statistics: statistics)
         .printSummary()
     }

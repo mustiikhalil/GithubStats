@@ -25,7 +25,7 @@ public struct Parameters {
     limit: Int,
     paginationLimit: Int,
     since: String? = nil,
-    shouldPrintStats: Bool = true)
+    skipPrintingStats: Bool = true)
   {
     self.token = token
     self.repository = repository
@@ -34,7 +34,7 @@ public struct Parameters {
     self.limit = limit
     self.paginationLimit = paginationLimit
     self.since = since
-    self.shouldPrintStats = shouldPrintStats
+    self.skipPrintingStats = skipPrintingStats
   }
 
   // MARK: Internal
@@ -47,7 +47,7 @@ public struct Parameters {
   let limit: Int
   let paginationLimit: Int
   let since: String?
-  let shouldPrintStats: Bool
+  let skipPrintingStats: Bool
 
   func generateURLRequest(
     withPage page: Int)
