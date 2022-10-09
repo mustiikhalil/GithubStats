@@ -29,7 +29,8 @@ struct GithubStatistics {
       let diff = workflow.updatedAt.timeIntervalSince1970 - workflow.runStartedAt.timeIntervalSince1970
       totalTime += diff
       if let status = workflow.conclusion {
-        statuses[status, default: StatusStats(count: 0, totalRunningTime: 0)] += StatusStats(count: 1, totalRunningTime: diff)
+        statuses[status, default: StatusStats(count: 0, totalRunningTime: 0)] +=
+          StatusStats(count: 1, totalRunningTime: diff)
       }
     }
 
