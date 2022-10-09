@@ -4,7 +4,7 @@
 --trimwhitespace always # trailingSpace
 --indent 2 #indent
 --ifdef no-indent #indent
---maxwidth 140 #wrap
+--maxwidth 120 #wrap
 --structthreshold 20 # organizeDeclarations
 --enumthreshold 20 # organizeDeclarations
 --wraparguments before-first # wrapArguments
