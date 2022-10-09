@@ -7,3 +7,4 @@ DerivedData/
 .netrc
 Package.resolved
 .swiftpm
+**.swp

@@ -27,5 +27,8 @@ let package = Package(
         "GithubActionsStatsCore"
       ]),
     .target(
-      name: "GithubActionsStatsCore")
+      name: "GithubActionsStatsCore"),
+    .testTarget(
+      name: "GithubActionsStatsTests",
+      dependencies: ["GithubActionsStatsCore"])
   ])

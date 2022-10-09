@@ -6,7 +6,7 @@ public struct GithubActionsStatsCore {
 
   public init(
     parameters: Parameters,
-    session: URLSession = URLSession.shared)
+    session: URLSessionProtocol = URLSession.shared)
   {
     self.parameters = parameters
     networking = Networking(session: session)
