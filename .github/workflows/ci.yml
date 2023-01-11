@@ -21,7 +21,7 @@ jobs:
     - name: test
       run: swift test --enable-code-coverage
     - name: Gather code coverage
-      run: xcrun llvm-cov export -format="lcov" .build/debug/GithubActionsStatsPackageTests.xctest/Contents/MacOS/GithubActionsStatsPackageTests -instr-profile .build/debug/codecov/default.profdata > coverage_report.lcov
+      run: xcrun llvm-cov export -format="lcov" .build/debug/GithubStatsPackageTests.xctest/Contents/MacOS/GithubStatsPackageTests -instr-profile .build/debug/codecov/default.profdata > coverage_report.lcov
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:

@@ -5,4 +5,7 @@ enum Errors: Error {
   case invalidURL(str: String)
   case urlComponents(str: String)
   case emptyResponse
+  case fileNotFound
+  case fileCantBeOpen
+  case alphaOrBetaRelease
 }

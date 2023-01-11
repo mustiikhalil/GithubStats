@@ -13,7 +13,7 @@ extension URLSession: URLSessionProtocol {
   }
 }
 
-struct Networking {
+public struct Networking {
 
   init(session: URLSessionProtocol) {
     self.session = session

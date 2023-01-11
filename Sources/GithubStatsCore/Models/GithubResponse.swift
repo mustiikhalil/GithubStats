@@ -9,11 +9,11 @@ struct WorkFlow: Decodable {
   let updatedAt: Date
 }
 
-struct GithubResponse: Decodable {
+struct GithubActionResponse: Decodable {
   let totalCount: Int
   let workflowRuns: [WorkFlow]
 }
 
-struct GithubResponses {
-  var responses: [GithubResponse]
+struct GithubActionResponses {
+  var responses: [GithubActionResponse]
 }

@@ -1,6 +1,6 @@
 import XCTest
 
-@testable import GithubActionsStatsCore
+@testable import GithubStatsCore
 
 final class NetworkingTests: XCTestCase {
 
