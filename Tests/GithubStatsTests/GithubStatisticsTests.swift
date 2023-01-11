@@ -1,11 +1,11 @@
 import XCTest
 
-@testable import GithubActionsStatsCore
+@testable import GithubStatsCore
 
 final class GithubStatisticsTests: XCTestCase {
 
   func testStatisticsFailureRun() {
-    let responses = GithubResponses(responses: [])
+    let responses = GithubActionResponses(responses: [])
     let statistics = GithubStatistics(response: responses)
     XCTAssertThrowsError(try statistics.run(), "Throws emptyResponse Error")
   }
@@ -14,9 +14,9 @@ final class GithubStatisticsTests: XCTestCase {
     let totalCount = 9
     let newest = Date(timeIntervalSince1970: 100_000_000)
     let oldest = Date(timeIntervalSince1970: 0)
-    let responses = GithubResponses(
+    let responses = GithubActionResponses(
       responses: [
-        GithubResponse(
+        GithubActionResponse(
           totalCount: totalCount,
           workflowRuns: [
             WorkFlow(
@@ -55,7 +55,7 @@ final class GithubStatisticsTests: XCTestCase {
               createdAt: oldest,
               updatedAt: oldest.adding(timeInternal: 10000)),
           ]),
-        GithubResponse(
+        GithubActionResponse(
           totalCount: totalCount,
           workflowRuns: [
             WorkFlow(

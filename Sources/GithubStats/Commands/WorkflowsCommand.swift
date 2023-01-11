@@ -1,12 +1,11 @@
 import ArgumentParser
 import Foundation
-import GithubActionsStatsCore
+import GithubStatsCore
 
-@main
-struct GithubActionsStats: ParsableCommand, AsyncParsableCommand {
+struct WorkflowsCommand: ParsableCommand, AsyncParsableCommand {
 
   static var configuration: CommandConfiguration {
-    CommandConfiguration(commandName: "github-actions-stats")
+    CommandConfiguration(commandName: "workflow")
   }
 
   @Argument(help: "Bearer Token that has access to the repository")
@@ -48,13 +47,13 @@ struct GithubActionsStats: ParsableCommand, AsyncParsableCommand {
       token: token,
       repository: repository,
       owner: owner,
-      workflowId: workflow,
+      request: .workflowRun(withId: workflow),
       limit: limit,
       paginationLimit: paginationLimit,
       since: since,
       skipPrintingStats: skipPrintingStats)
 
-    var githubActionCore = GithubActionsStatsCore(
+    var githubActionCore = Workflows(
       parameters: parameters)
     try await githubActionCore.run()
   }

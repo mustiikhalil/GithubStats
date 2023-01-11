@@ -4,31 +4,35 @@
 import PackageDescription
 
 let package = Package(
-  name: "GithubActionsStats",
+  name: "GithubStats",
   platforms: [
     .macOS(.v12)
   ],
   products: [
     .executable(
-      name: "GithubActionsStats",
-      targets: ["GithubActionsStats"]),
+      name: "GithubStats",
+      targets: ["GithubStats"]),
     .library(
-      name: "GithubActionsStatsCore",
-      targets: ["GithubActionsStatsCore"])
+      name: "GithubStatsCore",
+      targets: ["GithubStatsCore"])
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-argument-parser", from: "1.1.4"),
+    .package(url: "https://github.com/onevcat/Rainbow", from: "4.0.1")
   ],
   targets: [
     .executableTarget(
-      name: "GithubActionsStats",
+      name: "GithubStats",
       dependencies: [
         .product(name: "ArgumentParser", package: "swift-argument-parser"),
-        "GithubActionsStatsCore"
+        "GithubStatsCore"
       ]),
     .target(
-      name: "GithubActionsStatsCore"),
+      name: "GithubStatsCore",
+      dependencies: [
+        .product(name: "Rainbow", package: "Rainbow")
+      ]),
     .testTarget(
-      name: "GithubActionsStatsTests",
-      dependencies: ["GithubActionsStatsCore"])
+      name: "GithubStatsTests",
+      dependencies: ["GithubStatsCore"])
   ])

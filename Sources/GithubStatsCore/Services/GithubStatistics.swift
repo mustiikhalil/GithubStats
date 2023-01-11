@@ -4,7 +4,7 @@ struct GithubStatistics {
 
   // MARK: Lifecycle
 
-  init(response: GithubResponses) {
+  init(response: GithubActionResponses) {
     self.response = response
   }
 
@@ -46,6 +46,6 @@ struct GithubStatistics {
 
   // MARK: Private
 
-  private let response: GithubResponses
+  private let response: GithubActionResponses
 
 }

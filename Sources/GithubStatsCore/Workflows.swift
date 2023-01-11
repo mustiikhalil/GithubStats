@@ -1,6 +1,6 @@
 import Foundation
 
-public struct GithubActionsStatsCore {
+public struct Workflows {
 
   // MARK: Lifecycle
 
@@ -41,21 +41,21 @@ public struct GithubActionsStatsCore {
 
   private let networking: Networking
 
-  private mutating func fetchGithubData(parameters: Parameters) async throws -> GithubResponses {
-    var githubResponses: [GithubResponse] = []
+  private mutating func fetchGithubData(parameters: Parameters) async throws -> GithubActionResponses {
+    var githubResponses: [GithubActionResponse] = []
     for page in 1 ... parameters.paginationLimit {
       let request = try parameters.generateURLRequest(
         withPage: page)
       let data = try await networking.fetch(
         urlRequest: request)
-      let response = try decoder.decode(GithubResponse.self, from: data)
+      let response = try decoder.decode(GithubActionResponse.self, from: data)
       githubResponses.append(response)
       if response.workflowRuns.count < parameters.limit {
         break
       }
     }
 
-    return GithubResponses(
+    return GithubActionResponses(
       responses: githubResponses)
   }
 
