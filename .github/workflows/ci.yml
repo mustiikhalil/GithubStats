@@ -29,6 +29,13 @@ jobs:
         fail_ci_if_error: true
         files: ./coverage_report.lcov
         xcode: true
+  test-linux:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: test
+      run: swift build
   format:
     name: Format
     runs-on: macos-latest
