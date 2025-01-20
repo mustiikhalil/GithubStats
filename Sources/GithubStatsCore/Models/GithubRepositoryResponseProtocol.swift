@@ -85,7 +85,6 @@ extension String {
 }
 
 extension String {
-
   var version: String? {
     let str = split(separator: "/")
       .last?

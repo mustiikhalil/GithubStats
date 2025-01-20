@@ -16,9 +16,9 @@ struct V1SwiftResolvedPackage: Decodable {
     self.pins = try pins.decode([V1Package].self, forKey: .pins)
     version = try container.decode(Int.self, forKey: .version)
   }
+
   let pins: [V1Package]
   let version: Int
-
 }
 
 struct V1Package: DecodablePin {

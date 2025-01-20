@@ -30,8 +30,8 @@ final class LatestReleasesWorker {
       let decodedData = try decoder.decode(V1SwiftResolvedPackage.self, from: data)
       return try await fetchPackagesFrom(pins: decodedData.pins)
     case .v2:
-        let decodedData = try decoder.decode(V2SwiftResolvedPackage.self, from: data)
-        return try await fetchPackagesFrom(pins: decodedData.pins)
+      let decodedData = try decoder.decode(V2SwiftResolvedPackage.self, from: data)
+      return try await fetchPackagesFrom(pins: decodedData.pins)
     }
   }
 

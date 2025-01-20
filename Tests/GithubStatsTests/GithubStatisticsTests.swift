@@ -3,7 +3,6 @@ import XCTest
 @testable import GithubStatsCore
 
 final class GithubStatisticsTests: XCTestCase {
-
   func testStatisticsFailureRun() {
     let responses = GithubActionResponses(responses: [])
     let statistics = GithubStatistics(response: responses)
@@ -25,14 +24,14 @@ final class GithubStatisticsTests: XCTestCase {
               conclusion: .success,
               runStartedAt: oldest,
               createdAt: oldest,
-              updatedAt: oldest.adding(timeInternal: 1000000)),
+              updatedAt: oldest.adding(timeInternal: 1_000_000)),
             WorkFlow(
               name: "CI-job",
               path: "some.yml",
               conclusion: .success,
               runStartedAt: oldest,
               createdAt: oldest,
-              updatedAt: oldest.adding(timeInternal: 1000000)),
+              updatedAt: oldest.adding(timeInternal: 1_000_000)),
             WorkFlow(
               name: "CI-job",
               path: "some.yml",
@@ -64,29 +63,29 @@ final class GithubStatisticsTests: XCTestCase {
               conclusion: .success,
               runStartedAt: oldest,
               createdAt: oldest,
-              updatedAt: oldest.adding(timeInternal: 900000)),
+              updatedAt: oldest.adding(timeInternal: 900_000)),
             WorkFlow(
               name: "CI-job",
               path: "some.yml",
               conclusion: .success,
               runStartedAt: oldest,
               createdAt: oldest,
-              updatedAt: oldest.adding(timeInternal: 900000)),
+              updatedAt: oldest.adding(timeInternal: 900_000)),
             WorkFlow(
               name: "CI-job",
               path: "some.yml",
               conclusion: .success,
               runStartedAt: oldest,
               createdAt: oldest,
-              updatedAt: oldest.adding(timeInternal: 800000)),
+              updatedAt: oldest.adding(timeInternal: 800_000)),
             WorkFlow(
               name: "CI-job",
               path: "some.yml",
               conclusion: .success,
               runStartedAt: newest,
               createdAt: newest,
-              updatedAt: newest.adding(timeInternal: 1000000)),
-          ])
+              updatedAt: newest.adding(timeInternal: 1_000_000)),
+          ]),
       ])
     let statistics = GithubStatistics(response: responses)
     do {
@@ -94,12 +93,12 @@ final class GithubStatisticsTests: XCTestCase {
       XCTAssertEqual(statistics.name, "some.yml")
       XCTAssertEqual(statistics.workflowCount, 9)
       XCTAssertEqual(statistics.totalRuns, 9)
-      XCTAssertEqual(statistics.averageTime, 5612000.0)
+      XCTAssertEqual(statistics.averageTime, 5_612_000.0)
       XCTAssertEqual(statistics.startDate, oldest)
       XCTAssertEqual(statistics.endDate, newest)
       XCTAssertEqual(statistics.statuses[.inProgress]?.totalRunningTime, 10000.0)
       XCTAssertEqual(statistics.statuses[.inProgress]?.count, 1)
-      XCTAssertEqual(statistics.statuses[.success]?.totalRunningTime, 5600000.0)
+      XCTAssertEqual(statistics.statuses[.success]?.totalRunningTime, 5_600_000.0)
       XCTAssertEqual(statistics.statuses[.success]?.count, 6)
       XCTAssertEqual(statistics.statuses[.failure]?.totalRunningTime, 1000.0)
       XCTAssertEqual(statistics.statuses[.failure]?.count, 1)
@@ -109,7 +108,6 @@ final class GithubStatisticsTests: XCTestCase {
       XCTFail(error.localizedDescription)
     }
   }
-
 }
 
 extension Date {

@@ -8,7 +8,7 @@ public enum Request: Equatable {
   var url: String {
     let url = Request.base
     switch self {
-    case .workflowRun(let id):
+    case let .workflowRun(id):
       return url + "%@/%@/actions/workflows/\(id)/runs"
     case .latestRelease:
       return url + "%@/%@/git/refs/tags"
@@ -18,7 +18,6 @@ public enum Request: Equatable {
   }
 
   private static let base = "https://api.github.com/repos/"
-
 }
 
 public struct Parameters {
@@ -79,8 +78,7 @@ public struct Parameters {
   let branch: String?
   let skipPrintingStats: Bool
 
-  func generateURLRequest(withPage page: Int) throws -> URLRequest
-  {
+  func generateURLRequest(withPage page: Int) throws -> URLRequest {
     let str = String(format: request.url, owner, repository)
     guard let url = URL(string: str) else {
       throw Errors.invalidURL(str: str)
@@ -122,7 +120,7 @@ public struct Parameters {
     var request = URLRequest(url: url)
     request.allHTTPHeaderFields = [
       "Authorization": "Bearer \(token)",
-      "Accept": "application/vnd.github+json"
+      "Accept": "application/vnd.github+json",
     ]
     return request
   }

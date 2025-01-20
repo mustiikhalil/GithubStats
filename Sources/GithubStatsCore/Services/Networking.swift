@@ -5,7 +5,6 @@ public protocol URLSessionProtocol {
 }
 
 extension URLSession: URLSessionProtocol {
-
   public func dataAndStatusCode(for urlRequest: URLRequest) async throws -> (Data, Int) {
     let (data, response) = try await data(for: urlRequest)
     let httpResponse = response as? HTTPURLResponse
@@ -14,7 +13,6 @@ extension URLSession: URLSessionProtocol {
 }
 
 public struct Networking {
-
   init(session: URLSessionProtocol) {
     self.session = session
   }

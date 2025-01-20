@@ -3,7 +3,6 @@ import Foundation
 import GithubStatsCore
 
 struct WorkflowsCommand: ParsableCommand, AsyncParsableCommand {
-
   static var configuration: CommandConfiguration {
     CommandConfiguration(commandName: "workflow")
   }
@@ -57,5 +56,4 @@ struct WorkflowsCommand: ParsableCommand, AsyncParsableCommand {
       parameters: parameters)
     try await githubActionCore.run()
   }
-
 }

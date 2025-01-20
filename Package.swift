@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
   name: "GithubStats",
   platforms: [
-    .macOS(.v12)
+    .macOS(.v12),
   ],
   products: [
     .executable(
@@ -14,25 +14,25 @@ let package = Package(
       targets: ["GithubStats"]),
     .library(
       name: "GithubStatsCore",
-      targets: ["GithubStatsCore"])
+      targets: ["GithubStatsCore"]),
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-argument-parser", from: "1.1.4"),
-    .package(url: "https://github.com/onevcat/Rainbow", from: "4.0.1")
+    .package(url: "https://github.com/onevcat/Rainbow", from: "4.0.1"),
   ],
   targets: [
     .executableTarget(
       name: "GithubStats",
       dependencies: [
         .product(name: "ArgumentParser", package: "swift-argument-parser"),
-        "GithubStatsCore"
+        "GithubStatsCore",
       ]),
     .target(
       name: "GithubStatsCore",
       dependencies: [
-        .product(name: "Rainbow", package: "Rainbow")
+        .product(name: "Rainbow", package: "Rainbow"),
       ]),
     .testTarget(
       name: "GithubStatsTests",
-      dependencies: ["GithubStatsCore"])
+      dependencies: ["GithubStatsCore"]),
   ])

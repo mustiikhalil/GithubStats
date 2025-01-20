@@ -2,7 +2,6 @@ import XCTest
 @testable import GithubStatsCore
 
 final class ParametersTests: XCTestCase {
-
   func testGeneratingURL() {
     let token = "token"
     let params = Parameters(

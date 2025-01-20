@@ -5,7 +5,6 @@ public enum PackageVersion: String {
 }
 
 public struct LatestReleases {
-
   // MARK: Lifecycle
 
   public init(
