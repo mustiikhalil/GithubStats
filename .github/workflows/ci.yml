@@ -15,20 +15,11 @@ concurrency:
 jobs:
   test:
     name: Test
-    runs-on: macos-12
+    runs-on: macos-15
     steps:
     - uses: actions/checkout@v1
     - name: test
       run: swift test --enable-code-coverage
-    - name: Gather code coverage
-      run: xcrun llvm-cov export -format="lcov" .build/debug/GithubStatsPackageTests.xctest/Contents/MacOS/GithubStatsPackageTests -instr-profile .build/debug/codecov/default.profdata > coverage_report.lcov
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        env_vars: OS,SWIFT
-        fail_ci_if_error: true
-        files: ./coverage_report.lcov
-        xcode: true
   format:
     name: Format
     runs-on: macos-latest
