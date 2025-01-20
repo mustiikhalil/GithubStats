@@ -21,7 +21,7 @@ struct LatestReleasesCommand: ParsableCommand, AsyncParsableCommand {
     let latestRelease = LatestReleases(
       token: token,
       resolvedPackagePath: resolvedPackage,
-      version: version ?? .v1)
+      version: version ?? .v2)
     let data = try await latestRelease.run()
     let printer = ColorfulPrinter()
     printer.printSummary(for: data)
