@@ -3,7 +3,6 @@ import Foundation
 import GithubStatsCore
 
 struct LatestReleasesCommand: ParsableCommand, AsyncParsableCommand {
-
   static var configuration: CommandConfiguration {
     CommandConfiguration(commandName: "latest-release")
   }
@@ -21,18 +20,15 @@ struct LatestReleasesCommand: ParsableCommand, AsyncParsableCommand {
     let latestRelease = LatestReleases(
       token: token,
       resolvedPackagePath: resolvedPackage,
-      version: version ?? .v1)
+      version: version ?? .v2)
     let data = try await latestRelease.run()
     let printer = ColorfulPrinter()
     printer.printSummary(for: data)
   }
-
 }
 
 extension PackageVersion: ExpressibleByArgument {
-
   public init?(argument: String) {
     self.init(rawValue: argument)
   }
-
 }

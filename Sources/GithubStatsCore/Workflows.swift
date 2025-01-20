@@ -58,5 +58,4 @@ public struct Workflows {
     return GithubActionResponses(
       responses: githubResponses)
   }
-
 }

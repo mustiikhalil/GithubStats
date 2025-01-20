@@ -1,7 +1,6 @@
 import Foundation
 
 public struct ColorfulPrinter {
-
   public init() {}
 
   // MARK: Internal
@@ -17,11 +16,9 @@ public struct ColorfulPrinter {
     dateFormatter.dateFormat = "MMM d, yyyy"
     return dateFormatter
   }()
-
 }
 
 struct Printer {
-
   // MARK: Internal
 
   func printSummary<T: PrintableData>(for item: T) {
@@ -54,8 +51,7 @@ public protocol PrintableData {
 }
 
 extension Statistics: PrintableData {
-
-  public func printingColorfulData(using: DateFormatter) {
+  public func printingColorfulData(using _: DateFormatter) {
     assertionFailure("Not implemented")
   }
 
@@ -65,7 +61,7 @@ extension Statistics: PrintableData {
     let startDate = dateFormatter.string(from: startDate)
     let endDate = dateFormatter.string(from: endDate)
     print("range: \(startDate) - \(endDate)")
-    statuses.forEach { k, v in
+    for (k, v) in statuses {
       let percentage = Double(v.count) / totalRuns
       print("status: \(k) ---")
       print("percentage: \(Int(percentage * 100))")
@@ -91,5 +87,4 @@ extension Array: PrintableData where Element: PrintableData {
       item.printingData(using: dateformatter)
     }
   }
-
 }

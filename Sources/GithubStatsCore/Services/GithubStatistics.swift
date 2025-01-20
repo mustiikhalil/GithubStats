@@ -47,5 +47,4 @@ struct GithubStatistics {
   // MARK: Private
 
   private let response: GithubActionResponses
-
 }

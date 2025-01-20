@@ -25,7 +25,7 @@ public struct CombinedResponse: PrintableData {
 
   // MARK: Lifecycle
 
-  internal init(data: GithubRepositoryResponseProtocol, package: Pin) {
+  init(data: GithubRepositoryResponseProtocol, package: Pin) {
     self.data = data
     self.package = package
     diff = data.validate(currentTag: package.tag)
@@ -37,11 +37,11 @@ public struct CombinedResponse: PrintableData {
   public let data: GithubRepositoryResponseProtocol
   public let package: Pin
 
-  public func printingData(using: DateFormatter) {
+  public func printingData(using _: DateFormatter) {
     assertionFailure("Not implemented")
   }
 
-  public func printingColorfulData(using: DateFormatter) {
+  public func printingColorfulData(using _: DateFormatter) {
     print(getColorfulData())
   }
 
