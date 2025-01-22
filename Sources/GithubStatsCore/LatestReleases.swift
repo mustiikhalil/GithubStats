@@ -8,7 +8,7 @@ public struct LatestReleases {
   // MARK: Lifecycle
 
   public init(
-    token: String,
+    token: String? = nil,
     resolvedPackagePath: String,
     version: PackageVersion)
   {

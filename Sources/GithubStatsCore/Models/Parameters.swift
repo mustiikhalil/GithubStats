@@ -25,7 +25,7 @@ public struct Parameters {
   // MARK: Lifecycle
 
   public init(
-    token: String,
+    token: String?,
     url: URL,
     request: Request,
     branch: String? = nil,
@@ -46,7 +46,7 @@ public struct Parameters {
   }
 
   public init(
-    token: String,
+    token: String?,
     repository: String,
     owner: String,
     request: Request,
@@ -68,7 +68,7 @@ public struct Parameters {
 
   // MARK: Internal
 
-  let token: String
+  let token: String?
   let repository: String
   let owner: String
   let request: Request
@@ -118,11 +118,16 @@ public struct Parameters {
 
   private func generateURL(from url: URL) -> URLRequest {
     var request = URLRequest(url: url)
-    request.allHTTPHeaderFields = [
-      "Authorization": "Bearer \(token)",
-      "Accept": "application/vnd.github+json",
-    ]
+    request.allHTTPHeaderFields = headers
     return request
+  }
+
+  private var headers: [String: String] {
+    var headers: [String: String] = ["Accept": "application/vnd.github+json"]
+    if let token {
+      headers["Authorization"] = "Bearer \(token)"
+    }
+    return headers
   }
 }
 

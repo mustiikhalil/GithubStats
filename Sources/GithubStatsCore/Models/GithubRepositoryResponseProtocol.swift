@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol GithubRepositoryResponseProtocol {
+public protocol GithubRepositoryResponseProtocol: Sendable {
   var sha: String? { get }
   var tag: String? { get }
 }

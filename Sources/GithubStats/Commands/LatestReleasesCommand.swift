@@ -7,13 +7,13 @@ struct LatestReleasesCommand: ParsableCommand, AsyncParsableCommand {
     CommandConfiguration(commandName: "latest-release")
   }
 
-  @Argument(help: "Bearer Token that has access to the repository")
-  var token: String
-
   @Argument(help: "Path to the resolved file")
   var resolvedPackage: String
 
-  @Argument(help: "Package Version to be parsed")
+  @Option(help: "Bearer Token that has access to the repository")
+  var token: String?
+
+  @Option(help: "Package Version to be parsed")
   var version: PackageVersion?
 
   func run() async throws {
