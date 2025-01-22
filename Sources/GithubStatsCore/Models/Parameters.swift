@@ -116,12 +116,6 @@ public struct Parameters {
 
   // MARK: Private
 
-  private func generateURL(from url: URL) -> URLRequest {
-    var request = URLRequest(url: url)
-    request.allHTTPHeaderFields = headers
-    return request
-  }
-
   private var headers: [String: String] {
     var headers: [String: String] = ["Accept": "application/vnd.github+json"]
     if let token {
@@ -129,6 +123,13 @@ public struct Parameters {
     }
     return headers
   }
+
+  private func generateURL(from url: URL) -> URLRequest {
+    var request = URLRequest(url: url)
+    request.allHTTPHeaderFields = headers
+    return request
+  }
+
 }
 
 extension URL {

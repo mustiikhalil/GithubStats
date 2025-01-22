@@ -30,7 +30,7 @@ extension DecodablePin {
     token: String?,
     using networking: Networking,
     decoder: JSONDecoder)
-  async throws -> CombinedResponse
+    async throws -> CombinedResponse
   {
     if state.hasVersion {
       let request = try state.generateURL(token: token, url: repositoryURL)
