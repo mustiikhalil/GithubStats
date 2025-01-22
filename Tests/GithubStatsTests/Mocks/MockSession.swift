@@ -2,7 +2,7 @@ import XCTest
 
 @testable import GithubStatsCore
 
-final class MockSession: URLSessionProtocol {
+final class MockSession: @unchecked Sendable, URLSessionProtocol {
   var data: Data!
   var statusCode: Int!
 
