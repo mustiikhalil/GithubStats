@@ -27,10 +27,10 @@ extension DecodablePin {
   }
 
   func fetch(
-    token: String,
+    token: String?,
     using networking: Networking,
     decoder: JSONDecoder)
-    async throws -> GithubRepositoryResponseProtocol
+    async throws -> CombinedResponse
   {
     if state.hasVersion {
       let request = try state.generateURL(token: token, url: repositoryURL)
@@ -42,11 +42,13 @@ extension DecodablePin {
         .sorted(by: { r1, r2 in
           r1.tag?.compare(r2.tag ?? "", options: .numeric) == .orderedAscending
         })
-      return values.last!
+      guard let last = values.last else { throw Errors.emptyResponse }
+      return CombinedResponse(data: last, package: self)
     } else {
       let request = try state.generateURL(token: token, url: repositoryURL)
       let data = try await networking.fetch(urlRequest: request)
-      return try decoder.decode([GithubCommitResponse].self, from: data).first!
+      let value = try decoder.decode([GithubCommitResponse].self, from: data).first!
+      return CombinedResponse(data: value, package: self)
     }
   }
 }

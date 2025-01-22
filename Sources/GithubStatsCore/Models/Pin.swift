@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol Pin {
+public protocol Pin: Sendable {
   var name: String { get }
   var owner: String { get }
   var sha: String? { get }
@@ -8,8 +8,8 @@ public protocol Pin {
   var hasVersion: Bool { get }
 
   func fetch(
-    token: String,
+    token: String?,
     using: Networking,
     decoder: JSONDecoder)
-    async throws -> GithubRepositoryResponseProtocol
+    async throws -> CombinedResponse
 }

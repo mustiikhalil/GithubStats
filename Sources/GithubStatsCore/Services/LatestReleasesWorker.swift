@@ -5,7 +5,7 @@ final class LatestReleasesWorker {
   // MARK: Lifecycle
 
   init(
-    token: String,
+    token: String?,
     resolvedPackagePath: String,
     version: PackageVersion,
     fileManager: FileReader = FileManager.default,
@@ -46,21 +46,35 @@ final class LatestReleasesWorker {
 
   private let version: PackageVersion
   private let fileManager: FileReader
-  private let token: String
+  private let token: String?
   private let resolvedPackagePath: String
   private let networking: Networking
 
   private func fetchPackagesFrom<T: Pin>(pins: [T]) async throws -> [CombinedResponse] {
-    var responses: [CombinedResponse] = []
-    for package in pins {
-      let response = try await package.fetch(
-        token: token,
-        using: networking,
-        decoder: decoder)
-      responses.append(CombinedResponse(
-        data: response,
-        package: package))
+    let token = token
+    let networking = networking
+    let decoder = decoder
+    return try await withThrowingTaskGroup(
+      of: CombinedResponse.self,
+      returning: [CombinedResponse].self)
+    { group in
+      for pin in pins {
+        group.addTask {
+          try await
+            pin.fetch(
+              token: token,
+              using: networking,
+              decoder: decoder)
+        }
+      }
+
+      var responses: [CombinedResponse] = []
+
+      for try await response in group {
+        responses.append(response)
+      }
+
+      return responses
     }
-    return responses
   }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol URLSessionProtocol {
+public protocol URLSessionProtocol: Sendable {
   func dataAndStatusCode(for urlRequest: URLRequest) async throws -> (Data, Int)
 }
 
@@ -12,7 +12,7 @@ extension URLSession: URLSessionProtocol {
   }
 }
 
-public struct Networking {
+public struct Networking: Sendable {
   init(session: URLSessionProtocol) {
     self.session = session
   }

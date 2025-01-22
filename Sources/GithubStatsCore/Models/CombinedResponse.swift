@@ -1,7 +1,7 @@
 import Foundation
 import Rainbow
 
-public enum Diffs: String {
+public enum Diffs: String, Sendable {
   case patch = "Patch", minor = "Minor", major = "Major", unknown = "UNKNOWN", equal
 
   public func color(current: String, online: String) -> String {
@@ -21,7 +21,7 @@ public enum Diffs: String {
   }
 }
 
-public struct CombinedResponse: PrintableData {
+public struct CombinedResponse: Sendable, PrintableData {
 
   // MARK: Lifecycle
 
