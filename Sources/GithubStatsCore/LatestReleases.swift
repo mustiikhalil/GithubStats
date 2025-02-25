@@ -1,7 +1,7 @@
 import Foundation
 
 public enum PackageVersion: String {
-  case v1, v2
+  case v1, v2, v3
 }
 
 public struct LatestReleases {

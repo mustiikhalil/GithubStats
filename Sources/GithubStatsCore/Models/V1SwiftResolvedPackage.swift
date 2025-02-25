@@ -25,4 +25,19 @@ struct V1Package: DecodablePin {
   let package: String
   let repositoryURL: URL
   let state: State
+  let host: Host?
+
+  init(from decoder: any Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    package = try container.decode(String.self, forKey: .package)
+    repositoryURL = try container.decode(URL.self, forKey: .repositoryURL)
+    state = try container.decode(State.self, forKey: .state)
+    host = Host(rawValue: repositoryURL.host())
+  }
+
+  enum CodingKeys: CodingKey {
+    case package
+    case repositoryURL
+    case state
+  }
 }
