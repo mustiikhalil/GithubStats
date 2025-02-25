@@ -9,7 +9,7 @@ struct State: Decodable {
     version != nil
   }
 
-  func generateURL(token: String?, url: URL) throws -> URLRequest {
+  func generateURL(token: String?, url: URL, host _: Host?) throws -> URLRequest {
     let params = Parameters(
       token: token,
       url: url,

@@ -1,5 +1,17 @@
 import Foundation
 
+public enum Host: String, Sendable {
+  public init?(rawValue: String?) {
+    if let rawValue, rawValue.contains("gitlab") {
+      self = .gitlab
+    } else {
+      self = .github
+    }
+  }
+
+  case github, gitlab
+}
+
 public enum Request: Equatable {
   case workflowRun(withId: String)
   case latestRelease

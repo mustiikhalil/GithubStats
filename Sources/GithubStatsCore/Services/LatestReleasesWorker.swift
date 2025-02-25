@@ -15,7 +15,10 @@ final class LatestReleasesWorker {
     self.resolvedPackagePath = resolvedPackagePath
     self.version = version
     self.fileManager = fileManager
-    networking = Networking(session: session)
+    let networking = Networking(session: session)
+    registeredServices = [
+      GithubWorkerService(service: networking)
+    ]
   }
 
   // MARK: Internal
@@ -32,46 +35,44 @@ final class LatestReleasesWorker {
     case .v2:
       let decodedData = try decoder.decode(V2SwiftResolvedPackage.self, from: data)
       return try await fetchPackagesFrom(pins: decodedData.pins)
+    case .v3:
+      let decodedData = try decoder.decode(V3SwiftResolvedPackage.self, from: data)
+      return try await fetchPackagesFrom(pins: decodedData.pins)
     }
   }
 
   // MARK: Private
 
-  private lazy var decoder: JSONDecoder = {
+  private let version: PackageVersion
+  private let fileManager: FileReader
+  private let token: String?
+  private let resolvedPackagePath: String
+  private let registeredServices: [PackageProviderService]
+  private let decoder: JSONDecoder = {
     let decoder = JSONDecoder()
     decoder.dateDecodingStrategy = .iso8601
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     return decoder
   }()
 
-  private let version: PackageVersion
-  private let fileManager: FileReader
-  private let token: String?
-  private let resolvedPackagePath: String
-  private let networking: Networking
-
-  private func fetchPackagesFrom<T: Pin>(pins: [T]) async throws -> [CombinedResponse] {
+  private func fetchPackagesFrom<T: DecodablePin>(
+    pins: [T]) async throws
+    -> [CombinedResponse]
+  {
     let token = token
-    let networking = networking
-    let decoder = decoder
     return try await withThrowingTaskGroup(
-      of: CombinedResponse.self,
+      of: [CombinedResponse].self,
       returning: [CombinedResponse].self)
     { group in
-      for pin in pins {
+      for registeredService in registeredServices {
         group.addTask {
-          try await
-            pin.fetch(
-              token: token,
-              using: networking,
-              decoder: decoder)
+          try await registeredService.fetchPackagesFrom(pins: pins, token: token)
         }
       }
-
       var responses: [CombinedResponse] = []
 
       for try await response in group {
-        responses.append(response)
+        responses.append(contentsOf: response)
       }
 
       return responses
